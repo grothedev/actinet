@@ -1,6 +1,6 @@
 @extends('template')
 
-
+<?php use Carbon\Carbon; ?>
 
 @section('container')
     <div class="row">
@@ -61,11 +61,30 @@
     	</div>
     	<div class = "col-md-9">
     		@foreach ($posts as $post)
-				<div class = "row">
-					<a href = "/{{$post->id}}" ><h4>{{ $post->title }}</h4></a>
-					{{ $post->text }}
-
-
+				<div class = "post">
+					<a href = "{{ $post->id }}""><div class = "post-title">{{ $post->title }}</div></a>
+					<div class = "post-stamp">
+						<?php 
+							$user = $post->user()->first();
+							$time =  Carbon::parse($post->created_at->timezone('America/Chicago')); //TODO update this to be dynamic
+							$timestamp = $time->diffForHumans();
+							$timestamp .= ' ' . $time->format('h:i A');
+						?>
+						{{ $timestamp }} - <a href = "u/{{ $user->id }}">{{ $user->name }}</a>
+					</div>
+					<div class = "post-text">
+						{{ $post->text }}
+					</div>
+					
+					<div class = "post-extra">
+						<div class = "post-tags">
+							@foreach($post->tags as $tag)
+								<div class = "tag">{{ $tag->tag }}</div>
+							@endforeach
+						</div>
+						<div class = "post-files"></div>
+						
+					</div>
 				</div>
 			@endforeach
     	</div>

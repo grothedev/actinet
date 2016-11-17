@@ -41,24 +41,23 @@ body {
 }
 
 
-.postTitle{
+.post-title{
 	font-family: "Lucida Console", Monaco, monospace;
 	display: inline-block;
 	font-size: large;
 }
 
 
-.postExtra{
-	display: none;
+.post-extra{
 	padding-left: 2%;
 }
 
 
-.postText{
+.post-text{
 	padding-left: 2%;
 }
 
-.postTags{
+.post-tags{
 	width: 100%;
 }
 

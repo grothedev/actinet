@@ -9,25 +9,31 @@ use App\Post;
 
 class CommentController extends Controller{
 	public function store($commentable_data){
-		$input = Request::all();
-
-		$input['user_id'] = Auth::user()['id'];
-
-		//commentable is the post or comment which is being commented on
-		$commentable_id = substr($commentable_data,  1);
-		$commentable;
-		if (strpos($commentable_data, 'p') !== false){
-			$commentable = Post::find($commentable_id);
-			$input['post_id'] = $commentable_id;
-			$input['parent_id'] = 0;
+		if (Auth::guest()){
+			return 'must be logged in';
 		} else {
-			$commentable = Comment::find($commentable_id);
-			$input['post_id'] = $commentable->post_id;
-			$input['parent_id'] = $commentable_id;
+			$input = Request::all();
+
+			$input['user_id'] = Auth::user()['id'];
+
+			//commentable is the post or comment which is being commented on
+			$commentable_id = substr($commentable_data,  1);
+			$commentable;
+			if (strpos($commentable_data, 'p') !== false){
+				$commentable = Post::find($commentable_id);
+				$input['post_id'] = $commentable_id;
+				$input['parent_id'] = 0;
+			} else {
+				$commentable = Comment::find($commentable_id);
+				$input['post_id'] = $commentable->post_id;
+				$input['parent_id'] = $commentable_id;
+			}
+
+			var_dump($input);
+
+			$c = Comment::create($input);
 		}
-
-
-		$c = Comment::create($input);
+		
 		
 
 		//old shit from before baum

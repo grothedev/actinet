@@ -11,7 +11,7 @@ class Comment extends Node
 	protected $table = 'comments';
 
 
-    protected $fillable = ['text', 'user_id', 'post_id'];
+    protected $fillable = ['text', 'user_id', 'post_id', 'parent_id'];
 
 
     public function user(){
@@ -21,6 +21,10 @@ class Comment extends Node
 	public function post(){
 		return $this->belongsTo('App\Post');
 	}
+
+	public function votes(){
+        return $this->hasMany('App\Vote');
+    }
 
 	/*public function commentable(){
 		return $this->morphTo();

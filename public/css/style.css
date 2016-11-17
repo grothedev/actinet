@@ -35,7 +35,7 @@ h2, h3, h4 {
 	padding: 10px;
 }
 
-.postStamp{
+.post-stamp{
 	padding-left: 5px;
 	display: inline-block;
 	font-size: 10px;
@@ -43,7 +43,7 @@ h2, h3, h4 {
 	
 }
 
-.postClickBox {
+.post-clickbox {
 	cursor: pointer;
 }
 
@@ -61,7 +61,7 @@ h2, h3, h4 {
 	padding-left: 2px;
 }
 
-.postFiles{
+.post-files{
 	font-size: 80%;
 	padding-left: 10px;
 	display: none;

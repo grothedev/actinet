@@ -10,19 +10,37 @@
 				{{ $post->text }}
 			</div>
 			<div class = "post-stamp">
-				{{ $post->created_at }}
+				<?php
+					use Carbon\Carbon;
+					$time = Carbon::parse($post->created_at->timezone('America/Chicago'));
+					$timestamp = $time->diffForHumans();
+					$timestamp .= ' ' . $time->format('h:i A');
+				?>
+
+				{{ $timestamp }}
 				
 			</div>
+
+			<div class = "post-extra">
+				<div class = "post-tags">
+					@foreach($post->tags as $tag)
+						{{ $tag }}
+					@endforeach
+				</div>
+				<div class = "post-files"></div>
+				
+			</div>
+
 			<div class = "comments">
 				@foreach($comments as $comment)
 
-					{{ $comment->getDescendantsAndSelf()->toHierarchy()->toJson() }}
+					@if($comment->depth == null) 
+						<script charset="UTF-8" type = "text/javascript">
 
-					<script charset="UTF-8" type = "text/javascript">
+							renderCommentTree('{{ $comment->getDescendantsAndSelf()->toHierarchy()->toJson() }}');
 
-						renderCommentTree('{{ $comment->getDescendantsAndSelf()->toHierarchy()->toJson() }}');
-
-					</script>
+						</script>
+					@endif
 				@endforeach
 			</div>
 		</div>
@@ -30,7 +48,7 @@
 
 			
 
-			<form class="form-horizontal" role="form" method="POST" action="{{ url('/make-comment/c' . $post->id) }}">
+			<form class="form-horizontal" role="form" method="POST" action="{{ url('/make-comment/p' . $post->id) }}">
 				{{ csrf_field() }}
 
 				<h4>Add to the discussion</h4>

@@ -22,4 +22,8 @@ class Post extends Model
     	return $this->hasMany('App\Comment');
     }
 
+    public function votes(){//do i need to have the inverse relationship on votes?
+        return $this->hasMany('App\Vote');
+    }
+
 }

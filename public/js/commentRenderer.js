@@ -20,5 +20,7 @@ function renderTree(comment){
 			renderTree(comment.children[i]);
 		}
 
+		document.write('</ul></li>');
+
 	}
 }

@@ -22,8 +22,11 @@ class PostController extends Controller{
 			$input = Request::all();
 			$user = Auth::user();
 			$input['user_id'] = $user['id'];
+			$input['lat'] = 42.030781;
+			$input['lon'] = -93.631913;
 
 			$post = Post::create($input);
+
 
 
 			$tags = explode(' ', $input['tags']);
@@ -36,8 +39,9 @@ class PostController extends Controller{
 			}
 
 			
-			
-			return view('posts.show', compact('post'));
+			$comments = Array(); //need to pass in null comments for the show view
+			return redirect('/' . $post->id); //redirecting to prevent duplicate form submission
+			//return view('posts.show', compact('post', 'comments'));
 		}
 	}
 

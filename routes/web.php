@@ -24,5 +24,10 @@ Route::get('/make-post', 'PostController@index');
 Route::post('/make-post', 'PostController@store');
 Route::post('/make-comment/{commentable_data}', 'CommentController@store');
 
+Route::get('/u/{id}', function($id){
+	$user = App\User::findOrFail($id);
+	return view('user', compact('user'));
+});
+
 Route::get('/{id}', 'PostController@show');
 

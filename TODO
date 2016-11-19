@@ -4,13 +4,11 @@ make a usable ui
 	tags clickable to toggle, how to best deal with this?
 	public user page
 	user modification page
-	add lat and lon to db tables, default to ames for now
 	popular tags for input
 	hide radius input for now 
 	some type of system for subscribing to posts and getting notifications
 	voting system
 
-prevent duplicate post on form resubmission
 spam prevention
 put descriptions and more detail on ui instructions
 put future plans 

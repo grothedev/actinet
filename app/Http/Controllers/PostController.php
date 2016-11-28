@@ -49,6 +49,7 @@ class PostController extends Controller{
 		$post = Post::findOrFail($id);
 
 		$comments = $post->comments()->get();
+
 		//$commentTree = $comments->getDescendantsAndSelf()->toHierarchy();
 		//var_dump($commentTree);
 		return view('posts.show', compact('post', 'comments'));

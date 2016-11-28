@@ -32,23 +32,48 @@
 			</div>
 
 			<div class = "comments">
-				@foreach($comments as $comment)
-
-					@if($comment->depth == null) 
+				
 						<script charset="UTF-8" type = "text/javascript">
 
-							renderCommentTree('{{ $comment->getDescendantsAndSelf()->toHierarchy()->toJson() }}');
+							
 
 						</script>
-					@endif
-				@endforeach
+
+						<?php
+							$traverse = function ($categories, $prefix = '-') use (&$traverse) {
+							    foreach ($categories as $category) {
+							        echo PHP_EOL.$prefix . outputComment($category);
+
+							        $traverse($category->children, $prefix.'-');
+							    }
+							};
+
+							$traverse($comments);
+
+							function outputComment($c){
+								return '<div class = "comment">' . $c->text . '</div>';
+							}
+
+						?>
+
+						@foreach($comments as $comment)
+						<?php
+							//$tree = $comment->get()->toTree();
+							//var_dump($tree);
+
+							//$traverse($comments);
+
+
+						?>
+						@endforeach
+
 			</div>
 		</div>
 		
 
 			
 
-			<form class="form-horizontal" role="form" method="POST" action="{{ url('/make-comment/p' . $post->id) }}">
+			<form class="form-horizontal" role="form" method="POST" action="{{ url('/make-comment/c' . $post->id) }}">
 				{{ csrf_field() }}
 
 				<h4>Add to the discussion</h4>

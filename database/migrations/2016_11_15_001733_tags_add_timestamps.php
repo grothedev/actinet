@@ -25,6 +25,6 @@ class TagsAddTimestamps extends Migration
      */
     public function down()
     {
-        //
+        Scheme::drop('tags');
     }
 }

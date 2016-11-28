@@ -19,19 +19,23 @@ class CommentController extends Controller{
 			//commentable is the post or comment which is being commented on
 			$commentable_id = substr($commentable_data,  1);
 			$commentable;
+			$c;
+
 			if (strpos($commentable_data, 'p') !== false){
 				$commentable = Post::find($commentable_id);
 				$input['post_id'] = $commentable_id;
 				$input['parent_id'] = 0;
+
 			} else {
 				$commentable = Comment::find($commentable_id);
 				$input['post_id'] = $commentable->post_id;
 				$input['parent_id'] = $commentable_id;
 			}
+			$c = new Comment($input);
+			$c->save();
+			var_dump($c);
 
-			var_dump($input);
-
-			$c = Comment::create($input);
+			
 		}
 		
 		

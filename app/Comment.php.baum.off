@@ -2,16 +2,19 @@
 
 namespace App;
 
+use Baum\Node;
 use Illuminate\Database\Eloquent\Model;
-use Kalnoy\Nestedset\NodeTrait;
 
-class Comment extends Model
+class Comment extends Node
 {
-	use NodeTrait;
 
-	protected $fillable = ['text', 'commentable_id', 'commentable_type', 'user_id', 'post_id', 'parent_id'];
+	protected $table = 'comments';
 
-	public function user(){
+
+    protected $fillable = ['text', 'user_id', 'post_id', 'parent_id'];
+
+
+    public function user(){
 		return $this->belongsTo('App\User');
 	}
 
@@ -19,16 +22,15 @@ class Comment extends Model
 		return $this->belongsTo('App\Post');
 	}
 
-	public function commentable(){
+	public function votes(){
+        return $this->hasMany('App\Vote');
+    }
+
+	/*public function commentable(){
 		return $this->morphTo();
 	}
 
 	public function comments(){
     	return $this->morphMany('App\Comment', 'commentable');
-    }
-
-	/*function tags(){
-
-	}*/
-
+    }*/
 }

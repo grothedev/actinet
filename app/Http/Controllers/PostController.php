@@ -48,7 +48,8 @@ class PostController extends Controller{
 	public function show($id){
 		$post = Post::findOrFail($id);
 
-		$comments = $post->comments()->get();
+		//retrieve first level comments so traverse function doesn't give duplicates
+		$comments = $post->comments()->withDepth()->having('depth', '=', 0)->get();
 
 		//$commentTree = $comments->getDescendantsAndSelf()->toHierarchy();
 		//var_dump($commentTree);

@@ -52,13 +52,15 @@ h2, h3, h4 {
 }
 
 .commentStamp{
-	font-size: 8px;
+	font-size: 1.2rem;
 	opacity: 0.8;
 }
 
 .commentText{
 	display: inline-block;
 	padding-left: 2px;
+	cursor: pointer;
+	font-size: 1.4rem;
 }
 
 .post-files{
@@ -68,7 +70,7 @@ h2, h3, h4 {
 }
 
 .commentBox{
-
+	display: none;
 }
 
 #userAccessBox{

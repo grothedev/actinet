@@ -1,19 +1,30 @@
-<div class = "comment">
-	<div class = "commentText">
-		{{ $comment->text }}
-	</div>
-	<div class = "commentStamp">
-		{{ $comment->created_at }}
-		{{ $comment->user()->get() }}
-	</div>
+	<script type="text/javascript">
+		function expandComments(id){
+			$("#commentBox-" + id).toggle(200);
+		}
 
-	<div class = "commentBox">
+	</script>
+	<div class = "commentClickBox" onclick = "expandComments({{ $comment->id }})">
+		<div class = "commentText">
+			{{ $comment->text }}
+		</div>
+		<div class = "commentStamp">
+			{{ $comment->user()->get()[0]['name'] }}
+
+			<?php
+				use Carbon\Carbon;
+				$time = Carbon::parse($comment->created_at->timezone('America/Chicago'));
+				//$timestamp = $time->diffForHumans(); //this is off by 6 hours for some reason
+				$timestamp = ' ' . $time->format('h:i A');
+			?>
+
+			{{ $timestamp }}
+		</div>	
+	</div>
+	<div class = "commentBox" id = "commentBox-{{ $comment->id }}">
 		<form class="form-horizontal" role="form" method="POST" action="{{ url('/make-comment/c' . $comment->id) }}">
 			{{ csrf_field() }}
 			<div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
-
-                <label for="text" class="col-md-2 control-label">Comment</label>
-
                 <div class="col-md-6">
 
                     <textarea id="text" class="form-control" name="text" value="{{ old('text') }}" required autofocus></textarea>
@@ -36,10 +47,3 @@
 
 		</form>
 	</div>
-
-	<div class = "comments">
-		@foreach($comment->comments as $comment)
-			include('comment.php');
-		@endforeach
-	</div>
-</div>

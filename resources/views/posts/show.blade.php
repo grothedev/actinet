@@ -13,11 +13,11 @@
 				<?php
 					use Carbon\Carbon;
 					$time = Carbon::parse($post->created_at->timezone('America/Chicago'));
-					$timestamp = $time->diffForHumans();
-					$timestamp .= ' ' . $time->format('h:i A');
+					//$timestamp = $time->diffForHumans();
+					$timestamp = ' ' . $time->format('h:i A');
 				?>
 
-				{{ $timestamp }}
+				{{ $timestamp }} - {{ $post->user['name'] }}
 				
 			</div>
 
@@ -32,40 +32,31 @@
 			</div>
 
 			<div class = "comments">
-				
-						<script charset="UTF-8" type = "text/javascript">
-
-							
-
-						</script>
-
 						<?php
+
 							$traverse = function ($categories, $prefix = '-') use (&$traverse) {
 							    foreach ($categories as $category) {
-							        echo PHP_EOL.$prefix . outputComment($category);
+							        echo PHP_EOL. '<div class = "comment">' . outputComment($category);
 
-							        $traverse($category->children, $prefix.'-');
+								        echo '<div class = "comments">';
+								        	$traverse($category->children, $prefix.'-');
+								        echo '</div>';	
+								    echo '</div>';
+
 							    }
 							};
 
 							$traverse($comments);
 
 							function outputComment($c){
-								return '<div class = "comment">' . $c->text . '</div>';
+								$comment = $c;
+								return view('posts.comment', compact('comment'));
 							}
 
 						?>
-
-						@foreach($comments as $comment)
-						<?php
-							//$tree = $comment->get()->toTree();
-							//var_dump($tree);
-
-							//$traverse($comments);
-
-
-						?>
-						@endforeach
+						<script charset="UTF-8" type = "text/javascript">
+							window.scrollTo(0, 0);
+						</script>
 
 			</div>
 		</div>
@@ -73,14 +64,14 @@
 
 			
 
-			<form class="form-horizontal" role="form" method="POST" action="{{ url('/make-comment/c' . $post->id) }}">
+			<form class="form-horizontal" role="form" method="POST" action="{{ url('/make-comment/p' . $post->id) }}">
 				{{ csrf_field() }}
 
 				<h4>Add to the discussion</h4>
 
 				<div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
 
-	                <label for="text" class="col-md-2 control-label">Add to the discusssion</label>
+	                <label for="text" class="col-md-2 control-label">Make a Comment</label>
 
 	                <div class="col-md-8">
 

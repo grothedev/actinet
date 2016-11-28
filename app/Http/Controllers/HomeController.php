@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $query = Request::all();
+        //$query = Request::all();
 
         //testing with single user
         //$user = User::where('name', $query['users'])->first();

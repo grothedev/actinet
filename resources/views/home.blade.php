@@ -3,14 +3,16 @@
 <?php use Carbon\Carbon; ?>
 
 @section('container')
-    <div class="row">
-        <div class="col-md-10 col-md-offset-2">
-            <p>
-                Welcome to the discussion/activism network at ISU. This website will be used to facilitate organized discussion and planning. It is still in development and lacking some features. <a href = "/register">Create an account</a> to join the discussion. 
-            </p>
-          
-        </div>
-    </div>
+	@if (Auth::guest()) 
+	    <div class="row">
+	        <div class="col-md-10 col-md-offset-2">
+	            <p>
+	                Welcome to the discussion/activism network at ISU. This website will be used to facilitate organized discussion and planning. It is still in development and lacking some features. <a href = "/register">Create an account</a> to join the discussion. 
+	            </p>
+	          
+	        </div>
+	    </div>
+	@endif
 
     <div class = "row">
     	<div class = "col-md-3">

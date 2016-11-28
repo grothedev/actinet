@@ -33,9 +33,8 @@ class CommentController extends Controller{
 			}
 			$c = new Comment($input);
 			$c->save();
-			var_dump($c);
 
-			
+			return redirect('/' . $c->post_id);
 		}
 		
 		

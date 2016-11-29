@@ -1,35 +1,46 @@
 @extends('template')
 
-<script charset="UTF-8" type = "text/javascript" src = "{{{ asset('/js/commentRenderer.js') }}}" ></script>
-
 @section('container')
 	<div class = "row">
 		<div class = "post">
-			<h3>{{ $post->title }}</h3>
-			<div class = "post-text">
-				{{ $post->text }}
-			</div>
-			<div class = "post-stamp">
-				<?php
-					use Carbon\Carbon;
-					$time = Carbon::parse($post->created_at->timezone('America/Chicago'));
-					//$timestamp = $time->diffForHumans();
-					$timestamp = ' ' . $time->format('h:i A');
-				?>
 
-				{{ $timestamp }} - {{ $post->user['name'] }}
-				
-			</div>
-
-			<div class = "post-extra">
-				<div class = "post-tags">
-					@foreach($post->tags as $tag)
-						{{ $tag }}
-					@endforeach
+			<!-- down/up vote on left, post content on right -->
+			<div class = "left" style = "display: inline-block;">
+				<div class = "voting">
+					<a href = "#" onclick = "vote({{ $post->id }}, 1);">up</a><br>
+					<a href = "#" onclick = "vote({{ $post->id }}, 0);">dn</a>
 				</div>
-				<div class = "post-files"></div>
-				
 			</div>
+			<div class = "right" style="display: inline-block;">
+				<h3>{{ $post->title }}</h3>
+				<div class = "post-text">
+					{{ $post->text }}
+				</div>
+				<div class = "post-stamp">
+					<?php
+						use Carbon\Carbon;
+						$time = Carbon::parse($post->created_at->timezone('America/Chicago'));
+						//$timestamp = $time->diffForHumans();
+						$timestamp = ' ' . $time->format('h:i A');
+					?>
+
+					{{ $timestamp }} - {{ $post->user['name'] }}
+					
+				</div>
+
+				<div class = "post-extra">
+					<div class = "post-tags">
+						@foreach($post->tags as $tag)
+							<div class = "tag">
+								{{ $tag->tag }}
+							</div>
+						@endforeach
+					</div>
+					<div class = "post-files"></div>
+					
+				</div>
+			</div>
+			
 
 			<div class = "comments">
 						<?php
@@ -55,7 +66,7 @@
 
 						?>
 						<script charset="UTF-8" type = "text/javascript">
-							window.scrollTo(0, 0);
+							window.scrollTo(0, 0); //this is not working
 						</script>
 
 			</div>

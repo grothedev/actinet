@@ -23,6 +23,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/make-post', 'PostController@index');
 Route::post('/make-post', 'PostController@store');
 Route::post('/make-comment/{commentable_data}', 'CommentController@store');
+Route::get('/vote', 'PostController@vote');
 
 Route::get('/u/{id}', function($id){
 	$user = App\User::findOrFail($id);

@@ -64,28 +64,38 @@
     	<div class = "col-md-9">
     		@foreach ($posts as $post)
 				<div class = "post">
-					<a href = "{{ $post->id }}""><div class = "post-title">{{ $post->title }}</div></a>
-					<div class = "post-stamp">
-						<?php 
-							$user = $post->user()->first();
-							$time =  Carbon::parse($post->created_at->timezone('America/Chicago')); //TODO update this to be dynamic
-							$timestamp = $time->diffForHumans();
-							$timestamp .= ' ' . $time->format('h:i A');
-						?>
-						{{ $timestamp }} - <a href = "u/{{ $user->id }}">{{ $user->name }}</a>
-					</div>
-					<div class = "post-text">
-						{{ $post->text }}
-					</div>
 					
-					<div class = "post-extra">
-						<div class = "post-tags">
-							@foreach($post->tags as $tag)
-								<div class = "tag">{{ $tag->tag }}</div>
-							@endforeach
+					<!-- down/up vote on left, post content on right -->
+					<div class = "left" style = "display: inline-block;">
+						<div class = "voting">
+							<a href = "" onclick = "vote({{ $post->id }}, 1);">up</a><br>
+							<a href = "" onclick = "vote({{ $post->id }}, 0);">dn</a>
 						</div>
-						<div class = "post-files"></div>
+					</div>
+					<div class = "right" style="display: inline-block;">
+						<a href = "{{ $post->id }}""><div class = "post-title">{{ $post->title }}</div></a>
+						<div class = "post-stamp">
+							<?php 
+								$user = $post->user()->first();
+								$time =  Carbon::parse($post->created_at->timezone('America/Chicago')); //TODO update this to be dynamic
+								$timestamp = $time->diffForHumans();
+								$timestamp .= ' ' . $time->format('h:i A');
+							?>
+							{{ $timestamp }} - <a href = "u/{{ $user->id }}">{{ $user->name }}</a>
+						</div>
+						<div class = "post-text">
+							{{ $post->text }}
+						</div>
 						
+						<div class = "post-extra">
+							<div class = "post-tags">
+								@foreach($post->tags as $tag)
+									<div class = "tag">{{ $tag->tag }}</div>
+								@endforeach
+							</div>
+							<div class = "post-files"></div>
+							
+						</div>
 					</div>
 				</div>
 			@endforeach

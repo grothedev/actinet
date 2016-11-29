@@ -7,6 +7,8 @@ use App\Post;
 use Request;
 use Auth;
 use App\Tag;
+use App\Vote;
+
 use QueryException;
 
 class PostController extends Controller{
@@ -54,5 +56,34 @@ class PostController extends Controller{
 		//$commentTree = $comments->getDescendantsAndSelf()->toHierarchy();
 		//var_dump($commentTree);
 		return view('posts.show', compact('post', 'comments'));
+	}
+
+	public function vote(){
+		$input = Request::all();
+		$pId = $input['pId'];
+		$v = $input['value']; //upvote or downvote, 1 or 0
+		$uId = Auth::user()['id'];
+
+		//checking if the user has already voted
+		$vote = Vote::where('user_id', $uId)->where('object_id', $pId)->get();
+		if (sizeof($vote) !== 0){ 
+			return 'already voted';
+		} else {
+			
+			if ($v == 0){ //downvote
+				Post::find($pId)->decrement('score');
+			} else { //upvote
+				Post::find($pId)->increment('score');
+			}
+
+			Vote::create(['object_id' => $input['pId'], 'object_type' => 'post', 'user_id' => 1, 'vote' => $input['value']]);
+			
+			return 'vote complete';
+		}
+
+		
+
+		
+
 	}
 }

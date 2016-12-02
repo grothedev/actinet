@@ -26,6 +26,7 @@ class PostController extends Controller{
 			$input['user_id'] = $user['id'];
 			$input['lat'] = 42.030781;
 			$input['lon'] = -93.631913;
+			$input['score'] = 0; //this should be dealth with in migration
 
 			$post = Post::create($input);
 

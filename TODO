@@ -1,13 +1,11 @@
 
 make a usable ui
-	comment box for each comment that is expanded
 	tags clickable to toggle, how to best deal with this?
 	public user page
 	user modification page
 	popular tags for input
 	hide radius input for now 
 	some type of system for subscribing to posts and getting notifications
-	voting system
 
 spam prevention
 put descriptions and more detail on ui instructions

@@ -163,7 +163,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Baum\Providers\BaumServiceProvider::class,
         /*
          * Package Service Providers...
          */

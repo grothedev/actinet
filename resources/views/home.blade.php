@@ -16,7 +16,7 @@
 
     <div class = "row">
     	<div class = "col-md-3">
-    		{!! Form::open(['url' => 'home', 'method' => 'get']); !!}
+    		{!! Form::open(['url' => '/', 'method' => 'get']); !!}
 
     			<h3>Search for Posts</h3>
     			<h5>By tag, user, and radius</h5>
@@ -62,6 +62,7 @@
 			{!! Form::close(); !!}
     	</div>
     	<div class = "col-md-9">
+
     		@foreach ($posts as $post)
 				<div class = "post">
 					

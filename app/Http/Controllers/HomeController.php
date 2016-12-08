@@ -33,12 +33,14 @@ class HomeController extends Controller
         $postsArray = Array();
 
         if (sizeof($query) == 0){
-            //do nothing
+            $posts = Post::all();
         } else {
 
 
-            $tagsStr = explode(' ', $query['tags']);
-            
+            //$tagsStr = explode(' ', $query['tags']);
+            //$tagsStr = Input::get('tags');
+            var_dump($query);
+
             foreach ($tagsStr as $t){
                 $tag = Tag::where('tag', $t )->first();
                 
@@ -48,8 +50,6 @@ class HomeController extends Controller
                     $posts->union($tag->posts()->get());
                     echo $tag->posts;                   
                 }
-
-
             }
 
                /* 
@@ -94,7 +94,9 @@ class HomeController extends Controller
 
        // $posts = new Collection($postsArray);
 
-        return view('home', compact('posts'));
+        $tags = Tag::all()->pluck('tag');
+
+        return view('home', compact('posts', 'tags'));
         
     }
 }

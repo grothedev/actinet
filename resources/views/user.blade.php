@@ -4,8 +4,9 @@
 	
 	<div class = "row">
 		
-		<h2>{{$user->name}}</h2>
-		<h4>{{$user->bio}}</h4>
+		<h4><b>About {{$user->name}}:</b> <p style = "margin-left: 4rem; margin-top: .6rem;">{{$user->bio}}</p></h4>
+
+		
 
 	</div>
 @endsection

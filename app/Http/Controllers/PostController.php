@@ -28,7 +28,7 @@ class PostController extends Controller{
 			$input['lon'] = -93.631913;
 			$input['score'] = 0; //this should be dealth with in migration
 
-			$post = Post::create($input);
+			$post = $user->posts()->create($input);
 
 
 

@@ -1,6 +1,7 @@
 
 make a usable ui
 	tags clickable to toggle, how to best deal with this?
+	unique username as well as profile name
 	public user page
 	user modification page
 	popular tags for input

@@ -20,6 +20,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
+Route::post('/', 'HomeController@index');
 Route::get('/make-post', 'PostController@index');
 Route::post('/make-post', 'PostController@store');
 Route::post('/make-comment/{commentable_data}', 'CommentController@store');
@@ -32,3 +33,4 @@ Route::get('/u/{id}', function($id){
 
 Route::get('/{id}', 'PostController@show');
 
+Route::get('/u/edit', 'UserController@edit');

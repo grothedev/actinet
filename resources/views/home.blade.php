@@ -36,9 +36,13 @@
 				<div class = "form-group">
 					<label for = "tags" class = "col-md-2 control-label">Tags </label>
 
-					{!! Form::select('tags[]', $tags, null, ['id' => 'tags', 'class' => 'form-control', 'multiple' => 'multiple']) !!}
+					<!-- 
+						drop down list of popular tags as well as better UI with select2 js
+					{!! Form::select('tags', [], null, ['class' => 'form-control', 'multiple' => 'true']) !!}-->
 
-					<input type = "text" id = "tagsoff" class = "form-control" name = "tags" autofocus />
+					
+
+					<input type = "text" id = "tags" class = "form-control" name = "tags" autofocus />
 					
 					<label>
 						{!! Form::checkbox('all_tags'); !!}
@@ -112,3 +116,14 @@
     	</div>
     </div>
 @endsection
+<body onload = "init()" />
+<script>
+	function init(){
+		//fancy dropdown UI
+		$('#tags').select2({
+			placeholder: 'choose some tags',
+			tags: true
+		});
+	}
+	
+</script>

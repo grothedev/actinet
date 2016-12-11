@@ -10,6 +10,8 @@
         <script type = "text/javascript" src = "{{{ asset('/js/jquery.js') }}}" ></script>
         <script type = "text/javascript" src = "{{{ asset('/js/bootstrap.min.js') }}}" ></script>
         <script type="text/javascript" src = "{{{ asset('/js/helpers.js') }}}"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     </head>
 
 

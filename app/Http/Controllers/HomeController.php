@@ -26,34 +26,37 @@ class HomeController extends Controller
      */
     public function index()
     {
+        /*
+            if a query has been submitted, get the posts with the appropiate tags and users
+            receives tags as a string with tags separated by spaces
+        */
 
-        $query = Request::all(); //CURRENTLY WORKING ON THIS
+        $query = Request::all();
         $posts = null;
-
         $postsArray = Array();
 
         if (sizeof($query) == 0){
             $posts = Post::all();
         } else {
 
-
-            //$tagsStr = explode(' ', $query['tags']);
-            //$tagsStr = Input::get('tags');
-            var_dump($query);
+            $tagsStr = explode(' ', $query['tags']);
 
             foreach ($tagsStr as $t){
                 $tag = Tag::where('tag', $t )->first();
-                
-                if (is_null($posts)){
-                    $posts = $tag->posts;
-                } else {
-                    $posts->union($tag->posts()->get());
-                    echo $tag->posts;                   
+                if ($tag){
+                    if (is_null($posts)){
+                        $posts = $tag->posts;
+                    } else {
+                        $posts->union($tag->posts()->get());
+                        echo $tag->posts;                   
+                    }
                 }
+
+                
             }
 
-               /* 
-            foreach($posts as $post){
+        
+            /*foreach($posts as $post){
 
                 $noMatch = true;
 
@@ -75,7 +78,7 @@ class HomeController extends Controller
                     echo $posts->pull($post->id);
                 }
                 
-                //s$posts->remove($post);
+                $posts->remove($post);
                 /*if(){
                     if ($tag = Tag::where('tag', $tString)->first()){
                        array_push($postsArray, $tag->posts->toArray());
@@ -94,9 +97,10 @@ class HomeController extends Controller
 
        // $posts = new Collection($postsArray);
 
-        $tags = Tag::all()->pluck('tag');
-
-        return view('home', compact('posts', 'tags'));
+        //$tagIds = Tag::all()->pluck('id')->toArray();
+        //$tags = Tag::all()->pluck('tag')->toArray();
+        
+        return view('home', compact('posts'));
         
     }
 }

@@ -19,3 +19,5 @@ then
 	attach files
 	add location functionality
 	dynamic timezones
+	very dynamic and customizable data structure submission (rich but minimal text editor, embed files and images)
+	

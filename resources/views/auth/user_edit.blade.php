@@ -3,9 +3,9 @@
 @section('container')
     <div class="row">
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/u/edit') }}">
                         {{ csrf_field() }}
-                        <h3>Register</h3>
+                        <h3>Edit your Information</h3>
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 

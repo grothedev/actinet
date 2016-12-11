@@ -5,10 +5,14 @@
 		<div class = "post">
 
 			<!-- down/up vote on left, post content on right -->
-			<div class = "left" style = "display: inline-block;">
+			<div class = "left" style = "display: inline-block; width: 3rem;">
 				<div class = "voting">
-					<a href = "#" onclick = "vote({{ $post->id }}, 1);">up</a><br>
-					<a href = "#" onclick = "vote({{ $post->id }}, 0);">dn</a>
+					<a href = "" onclick = "vote({{ $post->id }}, 1);">
+						<img width = "70%" src = "{{{ asset('/img/upvote.png') }}}" />
+					</a><br>
+					<a href = "" onclick = "vote({{ $post->id }}, 0);">
+						<img width = "70%" src = "{{{ asset('/img/downvote.png') }}}" />
+					</a>
 				</div>
 			</div>
 			<div class = "right" style="display: inline-block;">

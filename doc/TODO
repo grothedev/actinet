@@ -1,33 +1,35 @@
 
 make a usable ui
-	tags clickable to toggle, how to best deal with this?
-	popular tags for input
-	hide radius input for now 
-	some type of system for subscribing to posts and getting notifications
-	add user's posts on their public pag
-	add about and source code to feedback page
+	subscription for tags and users
+	add about section
 	make git readme
 	
 housekeeping:
-	min/max values for database items
+	double check min/max values for database items
+	stay at top of page when showing a post
+	spam prevention
 	
-
-spam prevention
-put descriptions and more detail on ui instructions
-put future plans 
-
+	
 once all that is done, it should be ready for initial use
+	
+	
+	
+then 
+
+UI overhaul
+	tags clickable to toggle
+	popular tags for query input with select2 js library
+	very dynamic and customizable data structure submission for posts and bio (rich but minimal text editor, embed files and images)
 
 
-then
-	attach files
-	add location functionality
-	dynamic timezones
-	very dynamic and customizable data structure submission (rich but minimal text editor, embed files and images)
+attach files
+add location functionality
+dynamic timezones
+
 	
 
 
-to improve development
+workflow 
 	better method for making forms
 	
 	

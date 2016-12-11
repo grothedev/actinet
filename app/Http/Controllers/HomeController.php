@@ -35,26 +35,34 @@ class HomeController extends Controller
         $posts = null;
         $postsArray = Array();
 
-        if (sizeof($query) == 0){
+
+        if (sizeof($query) == 0){ //query empty
             $posts = Post::all();
         } else {
 
-            $tagsStr = explode(' ', $query['tags']);
-
-            foreach ($tagsStr as $t){
-                $tag = Tag::where('tag', $t )->first();
-                if ($tag){
-                    if (is_null($posts)){
-                        $posts = $tag->posts;
-                    } else {
-                        $posts->union($tag->posts()->get());
-                        echo $tag->posts;                   
-                    }
-                }
-
-                
+            if (array_key_exists('all_tags', $query)){
+                if ($query['all_tags'] = "1"){
+                    $posts = Post::all();                   
+                } 
             }
+            
+            if (array_key_exists('tags', $query)){
+                $tagsStr = explode(' ', $query['tags']);
 
+                    foreach ($tagsStr as $t){
+                        $tag = Tag::where('tag', $t )->first();
+                        if ($tag){
+                            if (is_null($posts)){
+                                $posts = $tag->posts;
+                            } else {
+                                $posts->union($tag->posts()->get());
+                                echo $tag->posts;                   
+                            }
+                        }
+
+                        
+                    }
+            }
         
             /*foreach($posts as $post){
 

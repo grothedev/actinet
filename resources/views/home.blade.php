@@ -1,5 +1,4 @@
 @extends('template')
-
 <?php use Carbon\Carbon; ?>
 
 @section('container')
@@ -75,6 +74,7 @@
     	<div class = "col-md-9">
 
     		@if ($posts !== null)
+
 
 	    		@foreach ($posts as $post)
 					<div class = "post">

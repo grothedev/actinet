@@ -30,7 +30,7 @@
                     <ul class = "nav navbar-nav navbar-left">
                         <li><a href = "/">Home</a></li>
                         <li><a href = "/make-post">Make a Post</a></li>
-                        <li><a href = "about">About/Contact</a></li>
+                        <li><a href = "/feedback">About/Feedback/Contact</a></li>
                     </ul>
 
 

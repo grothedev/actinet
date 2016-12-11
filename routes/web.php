@@ -25,8 +25,8 @@ Route::get('/make-post', 'PostController@index');
 Route::post('/make-post', 'PostController@store');
 Route::post('/make-comment/{commentable_data}', 'CommentController@store');
 Route::get('/vote', 'PostController@vote');
-
-
+Route::get('/feedback', 'FeedbackController@index');
+Route::post('/feedback', 'FeedbackController@create');
 Route::get('/u/edit', function(){
 	return view('auth.user_edit');
 });

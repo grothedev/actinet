@@ -1,12 +1,14 @@
 
 make a usable ui
 	tags clickable to toggle, how to best deal with this?
-	public user page
-	user modification page
 	popular tags for input
 	hide radius input for now 
 	some type of system for subscribing to posts and getting notifications
-
+	add user's posts on their public pag
+	users for search query
+	add about and source code to feedback page
+	make git readme
+	
 housekeeping:
 	min/max values for database items
 	

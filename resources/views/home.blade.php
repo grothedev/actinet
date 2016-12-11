@@ -19,7 +19,8 @@
     		{!! Form::open(['url' => '/', 'method' => 'get']); !!}
 
     			<h3>Search for Posts</h3>
-    			<h5>By tag, user, and radius</h5>
+    			<h5>By tag and users</h5>
+    			<!-- hide radius input for now
 				<div class="form-group">
 
 	                <label for="radius" class="col-md-2 control-label">Radius</label>
@@ -32,7 +33,8 @@
 	                    </select>
 
 	            </div>
-				
+				-->
+
 				<div class = "form-group">
 					<label for = "tags" class = "col-md-2 control-label">Tags </label>
 
@@ -66,6 +68,9 @@
 
 				{!! Form::submit('Search for Posts') !!}
 			{!! Form::close(); !!}
+
+			This is an by no means the complete version of the user interface. <a href = "/feedback" >Give your suggestions, if you would like. </a>
+
     	</div>
     	<div class = "col-md-9">
 

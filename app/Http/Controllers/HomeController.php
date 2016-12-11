@@ -49,21 +49,37 @@ class HomeController extends Controller
             if (array_key_exists('tags', $query)){
                 $tagsStr = explode(' ', $query['tags']);
 
-                    foreach ($tagsStr as $t){
-                        $tag = Tag::where('tag', $t )->first();
-                        if ($tag){
-                            if (is_null($posts)){
-                                $posts = $tag->posts;
-                            } else {
-                                $posts->union($tag->posts()->get());
-                                echo $tag->posts;                   
-                            }
+                foreach ($tagsStr as $t){
+                    $tag = Tag::where('tag', $t )->first();
+                    if ($tag){
+                        if (is_null($posts)){
+                            $posts = $tag->posts;
+                        } else {
+                            $posts->union($tag->posts()->get());
+                            echo $tag->posts;                   
                         }
-
-                        
                     }
+
+                    
+                }
             }
         
+            if (array_key_exists('users', $query)){
+                $usersStr = explode(' ', $query['users']);
+
+                foreach ($usersStr as $u){
+                    $user = User::where('name', $u)->first();
+                    if ($user){
+                        if (is_null($posts)){
+                            $posts = $user->posts;
+                        } else {
+                            $posts->union($user->posts()->get());
+                        }
+                    }
+                }
+
+            }
+
             /*foreach($posts as $post){
 
                 $noMatch = true;

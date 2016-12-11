@@ -1,12 +1,15 @@
 
 make a usable ui
 	tags clickable to toggle, how to best deal with this?
-	unique username as well as profile name
 	public user page
 	user modification page
 	popular tags for input
 	hide radius input for now 
 	some type of system for subscribing to posts and getting notifications
+
+housekeeping:
+	min/max values for database items
+	
 
 spam prevention
 put descriptions and more detail on ui instructions
@@ -20,4 +23,10 @@ then
 	add location functionality
 	dynamic timezones
 	very dynamic and customizable data structure submission (rich but minimal text editor, embed files and images)
+	
+
+
+to improve development
+	better method for making forms
+	
 	

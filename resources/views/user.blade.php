@@ -2,8 +2,10 @@
 
 @section('container')
 	
-	<div class = "row">
-		
-		<h4><b>About {{$user->name}}:</b> <p style = "margin-left: 4rem; margin-top: .6rem;">{{$user->bio}}</p></h4>
-	</div>
+	<div class = "row"><center>
+		<h3> {{$user->profile_name}} <h3>
+		<h4>{{$user->name}}</h4>
+
+		<p>{{$user->bio}}</p>
+	</center></div>
 @endsection

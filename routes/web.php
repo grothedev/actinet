@@ -26,11 +26,17 @@ Route::post('/make-post', 'PostController@store');
 Route::post('/make-comment/{commentable_data}', 'CommentController@store');
 Route::get('/vote', 'PostController@vote');
 
+
+Route::get('/u/edit', function(){
+	return view('auth.user_edit');
+});
+Route::post('/u/edit', 'Auth\UserEditController@edit');
 Route::get('/u/{id}', function($id){
 	$user = App\User::findOrFail($id);
 	return view('user', compact('user'));
 });
 
+
+
 Route::get('/{id}', 'PostController@show');
 
-Route::get('/u/edit', 'UserController@edit');

@@ -38,8 +38,8 @@
 					<label for = "tags" class = "col-md-2 control-label">Tags </label>
 
 					<!-- 
-						drop down list of popular tags as well as better UI with select2 js
-					{!! Form::select('tags', [], null, ['class' => 'form-control', 'multiple' => 'true']) !!}-->
+						drop down list of popular tags as well as better UI with select2 js -->
+					{!! Form::select('tags', [], null, ['class' => 'form-control', 'multiple' => 'true', 'id' => 'tags']) !!}
 
 					
 
@@ -121,14 +121,33 @@
     	</div>
     </div>
 @endsection
-<body onload = "init()" />
-<script>
-	function init(){
+<body onload = "init({{ $tags->toJSON() }})" />
+<script type = "text/javascript">
+	function init(tags_json){
 		//fancy dropdown UI
-		$('#tags').select2({
-			placeholder: 'choose some tags',
-			tags: true
+		$(document).ready( function(){
+
+			//json to string, removing everything other than tag and id
+			tags_json = JSON.stringify(tags_json, ['id', 'tag']); 
+			
+			//string to json, renaming key 'tag' to 'text' to work with the select element
+			tags_json = JSON.parse(tags_json, function(key, value){
+				if (key === 'tag'){
+					this.text = value;
+				} else {
+					return value;
+				}
+			});
+
+			$('#tags').select2({
+				placeholder: 'Choose some tags',
+				//tags: true
+				data: tags_json
+			});
+
+
 		});
+		
 	}
 	
 </script>

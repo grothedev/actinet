@@ -122,9 +122,9 @@ class HomeController extends Controller
        // $posts = new Collection($postsArray);
 
         //$tagIds = Tag::all()->pluck('id')->toArray();
-        //$tags = Tag::all()->pluck('tag')->toArray();
+        $tags = Tag::all();
         
-        return view('home', compact('posts'));
+        return view('home', compact('posts', 'tags'));
         
     }
 }

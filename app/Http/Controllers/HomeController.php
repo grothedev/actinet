@@ -46,6 +46,27 @@ class HomeController extends Controller
                 } 
             }
             
+
+            //tagIds from the tag select dropdown
+            if (array_key_exists('tagIds', $query)){
+
+                foreach($query['tagIds'] as $tId){
+                    $tag = Tag::where('id', $tId)->first();
+                    if ($tag){ //tag should exist, because only existing tags are possible to input
+                        if (is_null($posts)){
+                            $posts = $tag->posts;
+                        } else {
+                            foreach($tag->posts as $p){
+                                $posts->prepend($p);
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+            /*
             if (array_key_exists('tags', $query)){
                 $tagsStr = explode(' ', $query['tags']);
 
@@ -55,14 +76,24 @@ class HomeController extends Controller
                         if (is_null($posts)){
                             $posts = $tag->posts;
                         } else {
-                            $posts->union($tag->posts()->get());
+                            echo 'b';
+
+                            foreach($tag->posts as $p){
+                                $posts->union($p);
+                            }
+
+                            //$posts->union($tag->posts->toArray());
+                            //var_dump( $tag->posts);
                             echo $tag->posts;                   
                         }
                     }
 
                     
                 }
-            }
+                echo '<pre>';
+                print_r($posts);
+                echo '</pre>';
+            }*/
         
             if (array_key_exists('users', $query)){
                 $usersStr = explode(' ', $query['users']);
@@ -73,55 +104,21 @@ class HomeController extends Controller
                         if (is_null($posts)){
                             $posts = $user->posts;
                         } else {
-                            $posts->union($user->posts()->get());
+                            
+                            foreach($user->posts as $p){
+                                $posts->prepend($p);
+                            }
                         }
                     }
                 }
 
             }
-
-            /*foreach($posts as $post){
-
-                $noMatch = true;
-
-                foreach ($tags as $tag){
-                    //echo $post->tags()->get() . '<br>';
-
-
-
-                    foreach ($post->tags()->get() as $pTag){
-                        echo $pTag . '<br>';
-                        if (strcmp($tag , $pTag['tag']) == 0){
-                            echo 't';
-                            $noMatch = false;
-                            continue 2;
-                        }
-                    }
-                }
-                if ($noMatch){
-                    echo $posts->pull($post->id);
-                }
-                
-                $posts->remove($post);
-                /*if(){
-                    if ($tag = Tag::where('tag', $tString)->first()){
-                       array_push($postsArray, $tag->posts->toArray());
-                    }
-                }
-            }*/
-
-
         }
-        //testing with single user
-        //$user = User::where('name', $query['users'])->first();
-
-         //figure out default query here
         
         //return var_dump($posts);
 
        // $posts = new Collection($postsArray);
 
-        //$tagIds = Tag::all()->pluck('id')->toArray();
         $tags = Tag::all();
         
         return view('home', compact('posts', 'tags'));

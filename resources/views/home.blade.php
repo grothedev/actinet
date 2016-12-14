@@ -39,12 +39,8 @@
 
 					<!-- 
 						drop down list of popular tags as well as better UI with select2 js -->
-					{!! Form::select('tags', [], null, ['class' => 'form-control', 'multiple' => 'true', 'id' => 'tags']) !!}
+					{!! Form::select('tagIds[]', [], null, ['class' => 'form-control', 'multiple' => 'true', 'id' => 'tagIds']) !!}
 
-					
-
-					<input type = "text" id = "tags" class = "form-control" name = "tags" autofocus />
-					
 					<label>
 						{!! Form::checkbox('all_tags'); !!}
 						Check here to include all tags
@@ -139,7 +135,7 @@
 				}
 			});
 
-			$('#tags').select2({
+			$('#tagIds').select2({
 				placeholder: 'Choose some tags',
 				//tags: true
 				data: tags_json

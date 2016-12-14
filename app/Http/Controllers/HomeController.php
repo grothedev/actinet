@@ -57,7 +57,10 @@ class HomeController extends Controller
                             $posts = $tag->posts;
                         } else {
                             foreach($tag->posts as $p){
-                                $posts->prepend($p);
+                                if (!$posts->contains($p)){ //dealing with duplicates
+                                    $posts->prepend($p);    
+                                }
+                                
                             }
                         }
                     }
@@ -106,7 +109,9 @@ class HomeController extends Controller
                         } else {
                             
                             foreach($user->posts as $p){
-                                $posts->prepend($p);
+                                if (!$posts->contains($p)){ //dealing with duplicates
+                                    $posts->prepend($p);    
+                                }
                             }
                         }
                     }

@@ -8,13 +8,15 @@ The idea behind this software is be as simple and minimal as possible, serving t
 ##Todo:
 	- subscription for tags and users
 	- add about section
+	- tags searched for stay in input on page load
+	- email verification	
 	
 ###housekeeping:
 	- double check min/max values for database items
 	- stay at top of page when showing a post
 	- spam prevention
 	- API documentation
-	
+
 	
 ###once all that is done, it should be ready for initial use
 	

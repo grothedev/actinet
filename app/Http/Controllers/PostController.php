@@ -13,7 +13,8 @@ use QueryException;
 
 class PostController extends Controller{
 	public function index(){
-		return view('posts.create');
+		$tags = Tag::all(); //send all tags to post making form for suggestions
+		return view('posts.create', compact('tags'));
 	}	
 
 	public function store(){
@@ -32,7 +33,9 @@ class PostController extends Controller{
 
 
 
-			$tags = explode(' ', $input['tags']);
+			//$tags = explode(' ', $input['tags']); //this is from the old way
+
+			$tags = $input['tags'];
 
 			foreach($tags as $tag){
 				

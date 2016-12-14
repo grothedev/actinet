@@ -46,7 +46,9 @@
 
 	                <div class="col-md-8">
 
-	                    <input type = "text" id="tags" class="form-control" name="tags" value="{{ old('tags') }}" required autofocus />
+	                    <!--<input type = "text" id="tags" class="form-control" name="tags" value="{{ old('tags') }}" required autofocus /> -->
+
+	                    {!! Form::select('tags[]', [], null, ['class' => 'form-control', 'multiple' => 'true', 'id' => 'tags']) !!}
 
 	                    @if ($errors->has('tags'))
 	                        <span class="help-block">
@@ -69,3 +71,36 @@
 		@endif
 	</div>
 @endsection
+
+<body onload = "init({{ $tags->toJSON() }})" />
+<script type = "text/javascript">
+	function init(tags_json){
+		//fancy dropdown UI
+		$(document).ready( function(){
+
+			//json to string, removing everything other than tag and id
+			tags_json = JSON.stringify(tags_json, ['id', 'tag']); 
+			
+			//string to json, renaming key 'tag' to 'text' to work with the select element
+			//also setting id to tag string so i don't have to  change post controller a lot
+			tags_json = JSON.parse(tags_json, function(key, value){
+				if (key === 'tag'){
+					this.text = value;
+					this.id = value;
+				} else {
+					return value;
+				}
+			});
+
+			$('#tags').select2({
+				placeholder: 'Choose some tags, or create new ones',
+				tags: true,
+				data: tags_json
+			});
+
+
+		});
+		
+	}
+	
+</script>

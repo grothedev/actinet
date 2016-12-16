@@ -12,7 +12,6 @@ The idea behind this software is be as simple and minimal as possible, serving t
 	- email verification	
 	
 ###housekeeping:
-	- double check min/max values for database items
 	- stay at top of page when showing a post
 	- spam prevention
 	- API documentation

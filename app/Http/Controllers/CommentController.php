@@ -8,6 +8,13 @@ use App\Comment;
 use App\Post;
 
 class CommentController extends Controller{
+
+	protected function validator(array $data){
+		return Validator::make($data, [
+            'text' => 'required|max:8192'
+        ]);
+	}
+
 	public function store($commentable_data){
 		if (Auth::guest()){
 			return 'must be logged in';

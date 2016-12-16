@@ -28,7 +28,7 @@
 						$timestamp = ' ' . $time->format('h:i A');
 					?>
 
-					{{ $timestamp }} - {{ $post->user['name'] }}
+					{{ $timestamp }} - <a href = "u/{{ $post->user['id'] }}">{{ $post->user['name'] }}</a>
 					
 				</div>
 

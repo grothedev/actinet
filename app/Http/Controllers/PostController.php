@@ -17,6 +17,13 @@ class PostController extends Controller{
 		return view('posts.create', compact('tags'));
 	}	
 
+	protected function validator(array $data){
+		return Validator::make($data, [
+            'title' => 'required|max:255',
+            'text' => 'required|max:8192'
+        ]);
+	}
+
 	public function store(){
 
 		if (Auth::guest()){

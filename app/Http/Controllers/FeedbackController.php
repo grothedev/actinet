@@ -11,6 +11,13 @@ class FeedbackController extends Controller
     	return view('feedback_form');
     }
 
+    protected function validator(array $data){
+        return Validator::make($data, [
+            'email' => 'required|max:255',
+            'text' => 'required|max:4096'
+        ]);
+    }
+
     public function create(){
     	$data = Request::all();
 

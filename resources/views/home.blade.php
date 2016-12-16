@@ -53,9 +53,11 @@
 				<div class = "form-group">
 					<label for = "users" class = "col-md-2 control-label">Users</label>
 
+					{!! Form::select('userIds[]', [], null, ['class' => 'form-control', 'multiple' => 'true', 'id' => 'userIds']) !!}
 
-					<input type = "text" id = "users" class = "form-control" name = "users" autofocus />
-
+					<!--
+					<input type = "text" id = "users"  value = "Choose some users" class = "form-control" name = "users" autofocus />
+					-->
 
 				</div>
 
@@ -64,7 +66,7 @@
 				{!! Form::submit('Search for Posts') !!}
 			{!! Form::close(); !!}
 
-			This is an by no means the complete version of the user interface. <a href = "/feedback" >Give your suggestions, if you would like. </a>
+			If you have ideas for how the user interface should work/look,<a href = "/feedback" > let it be known. </a>
 
     	</div>
     	<div class = "col-md-9">
@@ -117,18 +119,27 @@
     	</div>
     </div>
 @endsection
-<body onload = "init({{ $tags->toJSON() }})" />
+<body onload = "init({{ $tags->toJSON() }}, {{ $users->toJSON() }})" />
 <script type = "text/javascript">
-	function init(tags_json){
+	function init(tags_json, users_json){
 		//fancy dropdown UI
 		$(document).ready( function(){
 
 			//json to string, removing everything other than tag and id
 			tags_json = JSON.stringify(tags_json, ['id', 'tag']); 
-			
+			users_json = JSON.stringify(users_json, ['id', 'name']);
+
 			//string to json, renaming key 'tag' to 'text' to work with the select element
 			tags_json = JSON.parse(tags_json, function(key, value){
 				if (key === 'tag'){
+					this.text = value;
+				} else {
+					return value;
+				}
+			});
+
+			users_json = JSON.parse(users_json, function(key, value){
+				if (key === 'name'){
 					this.text = value;
 				} else {
 					return value;
@@ -141,6 +152,10 @@
 				data: tags_json
 			});
 
+			$('#userIds').select2({
+				placeholder: 'Choose some users',
+				data: users_json
+			});
 
 		});
 		

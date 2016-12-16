@@ -8,7 +8,7 @@ The idea behind this software is be as simple and minimal as possible, serving t
 ##Todo:
 	- subscription for tags and users
 	- add about section
-	- tags searched for stay in input on page load
+	- tags and users searched for stay in input on page load
 	- email verification	
 	
 ###housekeeping:

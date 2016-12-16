@@ -6,6 +6,7 @@ use Request;
 use App\Post;
 use App\User;
 use App\Tag;
+use Illuminate\Support\Collection;
 
 class HomeController extends Controller
 {
@@ -34,8 +35,9 @@ class HomeController extends Controller
         $query = Request::all();
         $posts = null;
         $postsArray = Array();
-
-
+        $queryTags = new Collection(); //searched for tags that will be sent to the view to keep in input
+        $queryUsers = new Collection(); //searched for users that will be sent to the view to keep in input
+        
         if (sizeof($query) == 0){ //query empty
             $posts = Post::all();
         } else {
@@ -52,6 +54,8 @@ class HomeController extends Controller
 
                 foreach($query['tagIds'] as $tId){
                     $tag = Tag::where('id', $tId)->first();
+                    $queryTags->prepend($tag); //to send searched for tags to the view to keep them in the input
+
                     if ($tag){ //tag should exist, because only existing tags are possible to input
                         if (is_null($posts)){
                             $posts = $tag->posts;
@@ -67,7 +71,25 @@ class HomeController extends Controller
                 }
             }
 
+            //getting posts for the searched for users
+            if (array_key_exists('userIds', $query)){
+                foreach($query['userIds'] as $uId){
+                    $user = User::where('id', $uId)->first();
+                    $queryUsers->prepend($user);
 
+                    if ($user){
+                        if (is_null($posts)){
+                            $posts = $user->posts;
+                        } else {
+                            foreach($user->posts as $p){
+                                if (!$posts->contains($p)){
+                                    $posts->prepend($p);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             /*
             if (array_key_exists('tags', $query)){
@@ -125,8 +147,9 @@ class HomeController extends Controller
        // $posts = new Collection($postsArray);
 
         $tags = Tag::all();
-        
-        return view('home', compact('posts', 'tags'));
+        $users = User::all();
+
+        return view('home', compact('posts', 'tags', 'queryTags', 'users'));
         
     }
 }

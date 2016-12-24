@@ -6,6 +6,7 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Mail, Request;
 
 class RegisterController extends Controller
 {
@@ -63,11 +64,44 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $confirmation_code = str_random(32);
+
+        User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'bio' => $data['bio']
+            'bio' => $data['bio'],
+            'confirmation_code' => $confirmation_code
         ]);
+
+        $dataForEmail = ['confirmation_code' => $confirmation_code]; //data for the mail send function has to be an array for some reason
+
+        Mail::send('email.verify', $dataForEmail, function($message){
+            $message->to(Request::get('email'), Request::get('name'))->subject('Verify your email address');
+        });
+
+        Flash::message('Thank you for signing up! Check your email for a verification code.');
+
+        return Redirect::home();
+    }
+
+    public function confirm($confirmation_code){
+        if ( !$confirmation_code ){
+            throw new InvalidConfirmationCodeException;
+        }
+
+        $user = User::whereConfirmationCode($confirmation_code)->first();
+
+        if ( !$user ){
+            throw new InvalidConfirmationCodeException;
+        }
+
+        $user->confirmed = 1;
+        $user->confirmation_code = null;
+        $user->save();
+
+        Flash::message('Your account has been verified');
+
+        return Redirect::route('login');
     }
 }

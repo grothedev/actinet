@@ -15,12 +15,12 @@ class CommentController extends Controller{
         ]);
 	}
 
-	public function store($commentable_data){
+	public function store($commentable_data, Request $input){
 		if (Auth::guest()){
 			return 'must be logged in';
 		} else {
 			$input = Request::all();
-
+			
 			$input['user_id'] = Auth::user()['id'];
 
 			//commentable is the post or comment which is being commented on

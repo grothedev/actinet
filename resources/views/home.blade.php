@@ -18,7 +18,7 @@
     		{!! Form::open(['url' => '/', 'method' => 'get']); !!}
 
     			<h3>Search for Posts</h3>
-    			<h5>By tag and users</h5>
+    			<h5>By tags and users</h5>
     			<!-- hide radius input for now
 				<div class="form-group">
 

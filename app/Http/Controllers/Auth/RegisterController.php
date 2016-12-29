@@ -66,7 +66,7 @@ class RegisterController extends Controller
     {
         $confirmation_code = str_random(32);
 
-        User::create([
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -74,15 +74,16 @@ class RegisterController extends Controller
             'confirmation_code' => $confirmation_code
         ]);
 
-        $dataForEmail = ['confirmation_code' => $confirmation_code]; //data for the mail send function has to be an array for some reason
+        //$dataForEmail = ['confirmation_code' => $confirmation_code]; //data for the mail send function has to be an array for some reason
 
-        Mail::send('email.verify', $dataForEmail, function($message){
+        //TODO email verification
+        /*Mail::send('email.verify', $dataForEmail, function($message){
             $message->to(Request::get('email'), Request::get('name'))->subject('Verify your email address');
         });
+        */
+        //Flash::message('Thank you for signing up!');  
 
-        Flash::message('Thank you for signing up! Check your email for a verification code.');
-
-        return Redirect::home();
+        //return redirect('/');
     }
 
     public function confirm($confirmation_code){
@@ -102,6 +103,6 @@ class RegisterController extends Controller
 
         Flash::message('Your account has been verified');
 
-        return Redirect::route('login');
+        return redirect('/login');
     }
 }

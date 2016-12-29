@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
+    <a id = "top" href = "#"></a>
     <head>
         <meta charset="utf-8">
 
@@ -13,9 +14,9 @@
         <script type="text/javascript" src = "{{{ asset('/js/helpers.js') }}}"></script>
         <link href="{{{ asset('/css/select2.min.css') }}}" rel="stylesheet" />
         <script src="{{{ asset('/js/select2.min.js') }}}"></script>
-    </head>
+    </head> 
 
-
+    <body onload = "location.href = '#top' " ></body>
     <div class = "navbar navbar-inverse navbar-static-top">
         <div class = "container">
             <div class = "navbar-header" style = "width: 100%;">
@@ -31,7 +32,8 @@
                     <ul class = "nav navbar-nav navbar-left">
                         <li><a href = "/">Home</a></li>
                         <li><a href = "/make-post">Make a Post</a></li>
-                        <li><a href = "/feedback">About/Feedback/Contact</a></li>
+                        <li><a href = "/about">About</a></li>
+                        <li><a href = "/feedback">Feedback/Contact</a></li>
                     </ul>
 
 
@@ -84,6 +86,5 @@
     <div class = "footer">
         @yield('footer')
     </div>
-
 
 </html>

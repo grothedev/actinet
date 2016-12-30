@@ -9,10 +9,10 @@ The idea behind this software is be as simple and minimal as possible, serving t
 	- subscription for tags and users
 	- add about section
 	- tags and users searched for stay in input on page load
-	- email verification	
+	- email verification
+	- PostController middleware for hyperlinks and other formatting	
 	
 ###housekeeping:
-	- stay at top of page when showing a post
 	- spam prevention
 	- API documentation
 

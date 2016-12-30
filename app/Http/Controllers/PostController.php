@@ -25,7 +25,7 @@ class PostController extends Controller{
 	}
 
 	public function store(){
-
+		
 		if (Auth::guest()){
 			return 'must be logged in';
 		} else {

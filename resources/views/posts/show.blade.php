@@ -5,7 +5,7 @@
 		<div class = "post">
 
 			<!-- down/up vote on left, post content on right -->
-			<div class = "left" style = "display: inline-block; width: 3rem;">
+			<div class = "left" style = "display: inline-block; width: 5%;">
 				<div class = "voting">
 					<a href = "" onclick = "vote({{ $post->id }}, 1);">
 						<img width = "70%" src = "{{{ asset('/img/upvote.png') }}}" />
@@ -15,7 +15,7 @@
 					</a>
 				</div>
 			</div>
-			<div class = "right" style="display: inline-block;">
+			<div class = "right" style="display: inline-block; width: 95%; float: right;">
 				<h3>{{ $post->title }}</h3>
 				<div class = "post-text">
 					{{ $post->text }}

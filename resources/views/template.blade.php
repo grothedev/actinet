@@ -32,7 +32,7 @@
                     <ul class = "nav navbar-nav navbar-left">
                         <li><a href = "/">Home</a></li>
                         <li><a href = "/make-post">Make a Post</a></li>
-                        <li><a href = "/about">About</a></li>
+                        <li><a href = "{{{ asset('/pdf/about.pdf') }}}">About</a></li>
                         <li><a href = "/feedback">Feedback/Contact</a></li>
                     </ul>
 
